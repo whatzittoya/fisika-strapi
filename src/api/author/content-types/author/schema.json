@@ -12,17 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "Name": {
       "type": "string",
       "required": true
     },
-    "description": {
+    "Bio": {
       "type": "text"
     },
-    "email": {
+    "Email": {
       "type": "email"
     },
-    "photo": {
+    "Photo": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -33,11 +33,11 @@
         "audios"
       ]
     },
-    "posts": {
+    "Posts": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::post.post",
-      "mappedBy": "author"
+      "mappedBy": "Author"
     }
   }
 }

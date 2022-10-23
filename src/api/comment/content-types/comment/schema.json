@@ -4,31 +4,31 @@
   "info": {
     "singularName": "comment",
     "pluralName": "comments",
-    "displayName": "Comment"
+    "displayName": "Comment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "Name": {
       "type": "string",
       "required": true
     },
-    "email": {
+    "Email": {
       "type": "email",
       "required": true
     },
-    "comment": {
+    "Comment": {
       "type": "string",
       "required": true,
       "unique": false
     },
-    "post": {
+    "Post": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::post.post",
-      "inversedBy": "comments"
+      "relation": "oneToOne",
+      "target": "api::post.post"
     }
   }
 }

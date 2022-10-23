@@ -20,7 +20,7 @@
       "type": "richtext",
       "required": true
     },
-    "featuredImage": {
+    "FeaturedImage": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -31,32 +31,28 @@
         "audios"
       ]
     },
-    "featuredPost": {
+    "FeaturedPost": {
       "type": "boolean",
       "required": true
     },
-    "author": {
+    "Excerpt": {
+      "type": "string",
+      "required": true
+    },
+    "Author": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::author.author",
-      "inversedBy": "posts"
+      "inversedBy": "Posts"
     },
-    "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "posts"
-    },
-    "comments": {
+    "Categories": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::comment.comment",
-      "mappedBy": "post"
+      "target": "api::category.category"
+    },
+    "Slug": {
+      "type": "uid",
+      "required": true
     }
   }
 }

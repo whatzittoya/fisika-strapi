@@ -1,20 +1,34 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+  register({ strapi }) {
+    const extensionService = strapi.service("plugin::graphql.extension");
+    extensionService.use(({ strapi }) => ({
+      typeDefs: `
+            type Query {
+              post(slug: String!): PostEntityResponse
+            }
+          `,
+      resolvers: {
+        Query: {
+          post: {
+            resolve: async (parent, args, context) => {
+              const { toEntityResponse } = strapi.service(
+                "plugin::graphql.format"
+              ).returnTypes;
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/*{ strapi }*/) {},
+              const data = await strapi.services["api::post.post"].find({
+                filters: { slug: args.slug },
+              });
+
+              const response = toEntityResponse(data.results[0]);
+
+              return response;
+            },
+          },
+        },
+      },
+    }));
+  },
+  bootstrap() {},
 };
